@@ -6,6 +6,8 @@ public class Klocek : MonoBehaviour {
 
     float fall = 0;
     public float fallSpeed = 1;
+    public bool dopuśćRotacje = true;
+    public bool ogarniczRotacje = false;
     // Use this for initialization
     void Start () {
         
@@ -42,7 +44,47 @@ public class Klocek : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            transform.Rotate(0, 0, 90);
+            if (dopuśćRotacje)
+            {
+                if (ogarniczRotacje){
+
+                    if (transform.rotation.eulerAngles.z >= 90)
+                    {
+                        transform.Rotate(0, 0, -90);
+                    }
+                    else
+                    {
+                        transform.Rotate(0, 0, 90);
+                    }
+                    
+                }else
+                {
+                    transform.Rotate(0, 0, 90);
+                }
+                if (sprawdzCzyJestWDobrejPozycji())
+                {
+
+                }
+                else
+                {
+                    if (ogarniczRotacje)
+                    {
+                        if (transform.rotation.eulerAngles.z >= 90)
+                        {
+                            transform.Rotate(0, 0, -90);
+                        }
+                        else
+                        {
+                            transform.Rotate(0, 0, 90);
+                        }
+                    }else
+                    {
+                        transform.Rotate(0,0,-90);
+                    }
+                    
+                }
+            }
+            
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - fall >= fallSpeed)
         {
@@ -54,6 +96,8 @@ public class Klocek : MonoBehaviour {
             else
             {
                 transform.position += new Vector3(0, 1, 0);
+                enabled = false;
+                FindObjectOfType<Gra>().spawnNowegoKlocka();
             }
             fall = Time.time;
         }
