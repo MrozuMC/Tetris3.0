@@ -118,9 +118,11 @@ public class Klocek : MonoBehaviour
             {
                 return false;
             }
-            if (FindObjectOfType<Gra>().GetTransformGridPosition(poz) != null & FindObjectOfType<Gra>().GetTransformGridPosition(poz).parent != transform) // tu tez zmienic nazwe na to co tam
+            if (FindObjectOfType<Gra>().GetTransformAtGridPosition(pozycja) != null && FindObjectOfType<Gra>().GetTransformAtGridPosition(pozycja).parent != transform) // tu tez zmienic nazwe na to co tam
+            {
                 return false;
-          }
+            }
+        }
         return true;
     }
 

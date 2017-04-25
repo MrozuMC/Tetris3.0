@@ -7,7 +7,7 @@ public class Gra : MonoBehaviour
 
     public static int wysokośćPlanszy = 20;
     public static int szerokośćPlanszy = 10;
-    public static Transform[,] grid = new Transform[szerokośćPlanszy, wysokośćPlanszy];
+    public static Transform[,] siatka = new Transform[szerokośćPlanszy, wysokośćPlanszy];
 
 
     // Use this for initialization
@@ -22,19 +22,19 @@ public class Gra : MonoBehaviour
 
     }
     public void aktualizowanieSiatki(Klocek klocek) { //chyba dobrze xd
-      for (int y = 0; y <wysokośćPlanszy; ++y) {
-        for (int x = 0; y <szerokośćPlanszy; ++x) {
-            if(grid[x,y] !=null) {
-            if (grid[x,y].parent == klocek.transform) {
-        grid[x,y] = null;
-            }
+      for (int y = 0; y < wysokośćPlanszy; ++y) {
+        for (int x = 0; x < szerokośćPlanszy; ++x) {
+            if(siatka[x,y] !=null) {
+                if (siatka[x,y].parent == klocek.transform) {
+                    siatka[x,y] = null;
+                }
           }
         }
       }
     foreach (Transform kloc in klocek.transform){ //nie bic mnie za kloca;
-    Vector2 poz = Round (kloc.pozycja);
+    Vector2 poz = Round (kloc.position);
         if (poz.y < wysokośćPlanszy) {
-            grid[(int)poz.x, (int)poz.y] = kloc;
+            siatka[(int)poz.x, (int)poz.y] = kloc;
         }
       }
     
@@ -44,9 +44,11 @@ public class Gra : MonoBehaviour
         {
             return null;
         }
-        else { }
+        else {
+            return siatka[(int)poz.x, (int)poz.y];
+        }
     }
-        public void spawnNowegoKlocka()
+    public void spawnNowegoKlocka()
     {
         GameObject nowyKlocek = (GameObject)Instantiate(Resources.Load(pobierzRandomowyKlocek(), typeof(GameObject)), new Vector2(5.0f, 20.0f), Quaternion.identity);
     }
