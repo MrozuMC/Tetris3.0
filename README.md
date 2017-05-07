@@ -7,4 +7,4 @@ opisac projekt
 co jakie zalozenia
 klasy
 opisac co kazdy zadeklarowal
-Tuty zrobione do 6 parta(włącznie)!
+Tuty zrobione do 11 parta(włącznie)!
