@@ -25,9 +25,9 @@ public class Klocek : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             transform.position += new Vector3(1, 0, 0);
-            if (sprawdzCzyJestWDobrejPozycji())
+            if (SprawdzCzyJestWDobrejPozycji())
             {
-               FindObjectOfType<Gra>().aktualizowanieSiatki(this); // tu tez cos zmienialem xd
+               FindObjectOfType<Gra>().AktualizowanieSiatki(this); // tu tez cos zmienialem xd
             }
             else
             {
@@ -37,7 +37,7 @@ public class Klocek : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             transform.position += new Vector3(-1, 0, 0);
-            if (sprawdzCzyJestWDobrejPozycji())
+            if (SprawdzCzyJestWDobrejPozycji())
             {
 
             }
@@ -67,9 +67,9 @@ public class Klocek : MonoBehaviour
                 {
                     transform.Rotate(0, 0, 90);
                 }
-                if (sprawdzCzyJestWDobrejPozycji())
+                if (SprawdzCzyJestWDobrejPozycji())
                 {
-                    FindObjectOfType<Gra>().aktualizowanieSiatki(this); //tu tez
+                    FindObjectOfType<Gra>().AktualizowanieSiatki(this); //tu tez
                 }
                 else
                 {
@@ -96,25 +96,31 @@ public class Klocek : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - fall >= fallSpeed)
         {
             transform.position += new Vector3(0, -1, 0);
-            if (sprawdzCzyJestWDobrejPozycji())
+            if (SprawdzCzyJestWDobrejPozycji())
             {
-                FindObjectOfType<Gra>().aktualizowanieSiatki(this); // tuuu
+                FindObjectOfType<Gra>().AktualizowanieSiatki(this); // tuuu
             }
             else
             {
                 transform.position += new Vector3(0, 1, 0);
+                FindObjectOfType<Gra>().UsunWiersz();
+                if (FindObjectOfType<Gra>().SprawdzCzyJestPowyzejSiatki(this))
+                {
+                    FindObjectOfType<Gra>().KoniecGry();
+                }
                 enabled = false;
-                FindObjectOfType<Gra>().spawnNowegoKlocka();
+                FindObjectOfType<Gra>().SpawnNowegoKlocka();
             }
             fall = Time.time;
         }
     }
-    bool sprawdzCzyJestWDobrejPozycji()
+
+    bool SprawdzCzyJestWDobrejPozycji()
     {
         foreach (Transform klocek in transform)
         {
             Vector2 pozycja = FindObjectOfType<Gra>().Round(klocek.position);
-            if (FindObjectOfType<Gra>().sprawdzCzyJestWPlanszy(pozycja) == false)
+            if (FindObjectOfType<Gra>().SprawdzCzyJestWPlanszy(pozycja) == false)
             {
                 return false;
             }
