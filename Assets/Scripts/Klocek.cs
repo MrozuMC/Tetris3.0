@@ -6,14 +6,16 @@ public class Klocek : MonoBehaviour
 {
 	float LastInputTime;
 	const float cooldown = 0.1f;
+
     float fall = 0;
-    public float fallSpeed = 1;
+    private float fallSpeed;
+
     public bool dopuśćRotacje = true;
     public bool ogarniczRotacje = false;
     // Use this for initialization
     void Start()
     {
-
+        fallSpeed = GameObject.Find("GameScripts").GetComponent<Gra>().fallSpeed;
     }
 
     // Update is called once per frame
@@ -29,41 +31,63 @@ public class Klocek : MonoBehaviour
 
     }
 
-    public void Sterowanie()
+    public void Wprawo()
     {
-		if (Input.GetKey("right"))
+        LastInputTime = Time.time;
+        transform.position += new Vector3(1, 0, 0);
+        if (SprawdzCzyJestWDobrejPozycji())
         {
-			LastInputTime = Time.time;
-            transform.position += new Vector3(1, 0, 0);
-            if (SprawdzCzyJestWDobrejPozycji())
-            {
-               FindObjectOfType<Gra>().AktualizowanieSiatki(this); // tu tez cos zmienialem xd
-            }
-            else
-            {
-                transform.position += new Vector3(-1, 0, 0);
-            }
+            FindObjectOfType<Gra>().AktualizowanieSiatki(this); // tu tez cos zmienialem xd
         }
-		else if (Input.GetKey("left"))
+        else
         {
-			LastInputTime = Time.time;
             transform.position += new Vector3(-1, 0, 0);
-            if (SprawdzCzyJestWDobrejPozycji())
+        }
+    }
+
+    public void Wlewo()
+    {
+        LastInputTime = Time.time;
+        transform.position += new Vector3(-1, 0, 0);
+        if (SprawdzCzyJestWDobrejPozycji())
+        {
+
+        }
+        else
+        {
+            transform.position += new Vector3(1, 0, 0);
+        }
+    }
+
+    public void Obrot()
+    {
+        if (dopuśćRotacje)
+        {
+            if (ogarniczRotacje)
             {
+
+                if (transform.rotation.eulerAngles.z >= 90)
+                {
+                    transform.Rotate(0, 0, -90);
+                }
+                else
+                {
+                    transform.Rotate(0, 0, 90);
+                }
 
             }
             else
             {
-                transform.position += new Vector3(1, 0, 0);
+                transform.Rotate(0, 0, 90);
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            if (dopuśćRotacje)
+            if (SprawdzCzyJestWDobrejPozycji())
+            {
+                FindObjectOfType<Gra>().AktualizowanieSiatki(this); //tu tez
+            }
+            else
             {
                 if (ogarniczRotacje)
                 {
-
                     if (transform.rotation.eulerAngles.z >= 90)
                     {
                         transform.Rotate(0, 0, -90);
@@ -72,58 +96,55 @@ public class Klocek : MonoBehaviour
                     {
                         transform.Rotate(0, 0, 90);
                     }
-
                 }
                 else
                 {
-                    transform.Rotate(0, 0, 90);
+                    transform.Rotate(0, 0, -90);
                 }
-                if (SprawdzCzyJestWDobrejPozycji())
-                {
-                    FindObjectOfType<Gra>().AktualizowanieSiatki(this); //tu tez
-                }
-                else
-                {
-                    if (ogarniczRotacje)
-                    {
-                        if (transform.rotation.eulerAngles.z >= 90)
-                        {
-                            transform.Rotate(0, 0, -90);
-                        }
-                        else
-                        {
-                            transform.Rotate(0, 0, 90);
-                        }
-                    }
-                    else
-                    {
-                        transform.Rotate(0, 0, -90);
-                    }
 
-                }
             }
-
         }
-		else if (Input.GetKey("down") || Time.time - fall >= fallSpeed)
+    }
+
+    public void Opadanie()
+    {
+        LastInputTime = Time.time;
+        transform.position += new Vector3(0, -1, 0);
+        if (SprawdzCzyJestWDobrejPozycji())
         {
-			LastInputTime = Time.time;
-            transform.position += new Vector3(0, -1, 0);
-            if (SprawdzCzyJestWDobrejPozycji())
+            FindObjectOfType<Gra>().AktualizowanieSiatki(this); // tuuu
+        }
+        else
+        {
+            transform.position += new Vector3(0, 1, 0);
+            FindObjectOfType<Gra>().UsunWiersz();
+            if (FindObjectOfType<Gra>().SprawdzCzyJestPowyzejSiatki(this))
             {
-                FindObjectOfType<Gra>().AktualizowanieSiatki(this); // tuuu
+                FindObjectOfType<Gra>().KoniecGry();
             }
-            else
-            {
-                transform.position += new Vector3(0, 1, 0);
-                FindObjectOfType<Gra>().UsunWiersz();
-                if (FindObjectOfType<Gra>().SprawdzCzyJestPowyzejSiatki(this))
-                {
-                    FindObjectOfType<Gra>().KoniecGry();
-                }
-                enabled = false;
-                FindObjectOfType<Gra>().SpawnNowegoKlocka();
-            }
-            fall = Time.time;
+            enabled = false;
+            FindObjectOfType<Gra>().SpawnNowegoKlocka();
+        }
+        fall = Time.time;
+    }
+
+    public void Sterowanie()
+    {
+		if (Input.GetKey("right"))
+        {
+            Wprawo();
+        }
+		if (Input.GetKey("left"))
+        {
+            Wlewo();
+        }
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            Obrot();
+        }
+		if (Input.GetKey("down") || Time.time - fall >= fallSpeed)
+        {
+            Opadanie();
         }
     }
 
