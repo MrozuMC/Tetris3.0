@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Gra.cs" />
      <Compile Include="Assets\Scripts\Klocek.cs" />
+     <Compile Include="Assets\Scripts\Menu.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/Program Files/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
