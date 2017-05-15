@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Klocek : MonoBehaviour
 {
-
+	float LastInputTime;
+	const float cooldown = 0.1f;
     float fall = 0;
     public float fallSpeed = 1;
     public bool dopuśćRotacje = true;
@@ -18,12 +19,21 @@ public class Klocek : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (Time.time <= LastInputTime + cooldown)
+		{
+			return; // not enough time has passed.
+
+		}
+
         Sterowanie();
+
     }
+
     public void Sterowanie()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+		if (Input.GetKey("right"))
         {
+			LastInputTime = Time.time;
             transform.position += new Vector3(1, 0, 0);
             if (SprawdzCzyJestWDobrejPozycji())
             {
@@ -34,8 +44,9 @@ public class Klocek : MonoBehaviour
                 transform.position += new Vector3(-1, 0, 0);
             }
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+		else if (Input.GetKey("left"))
         {
+			LastInputTime = Time.time;
             transform.position += new Vector3(-1, 0, 0);
             if (SprawdzCzyJestWDobrejPozycji())
             {
@@ -93,8 +104,9 @@ public class Klocek : MonoBehaviour
             }
 
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow) || Time.time - fall >= fallSpeed)
+		else if (Input.GetKey("down") || Time.time - fall >= fallSpeed)
         {
+			LastInputTime = Time.time;
             transform.position += new Vector3(0, -1, 0);
             if (SprawdzCzyJestWDobrejPozycji())
             {
