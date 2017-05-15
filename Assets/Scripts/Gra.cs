@@ -14,11 +14,18 @@ public class Gra : MonoBehaviour
     public int punktyZaDwieLinie = 100;
     public int punktyZaTrzyLinie = 300;
     public int punktyZaCzteryLinie = 1200;
+    public int aktualnyLevel = 0;
+    public float fallSpeed = 1.0f;
 
     private int liczbaPelnychWierszyTejTury = 0;
+    private int liczbaWyczyszczonychwierszy = 0;
     private int aktualnePunkty = 0;
 
-    public Text hud_punkty;
+
+    public Text TBPunkty;
+    public Text TBLevel;
+    public Text TBLinie;
+
     // Use this for initialization
     void Start()
     {
@@ -30,6 +37,9 @@ public class Gra : MonoBehaviour
     {
         AktualizujPunkty();
         AktualizujUi();
+        AktualizujWynik();
+        AktualizujLevel();
+        AktualizujPredkosc();
     }
 
     public bool SprawdzCzyJestPowyzejSiatki(Klocek klocek)
@@ -48,9 +58,26 @@ public class Gra : MonoBehaviour
         return false;
     }
 
+    public void AktualizujLevel()
+    {
+        aktualnyLevel = liczbaWyczyszczonychwierszy / 10;
+    }
+
+    public void AktualizujPredkosc()
+    {
+        fallSpeed = 1.0f - ((float)aktualnyLevel * 0.1f);
+    }
+
     public void AktualizujUi()
     {
-        hud_punkty.text = aktualnePunkty.ToString();
+        TBPunkty.text = aktualnePunkty.ToString();
+        TBLevel.text = aktualnyLevel.ToString();
+        TBLinie.text = liczbaWyczyszczonychwierszy.ToString();
+    }
+
+    public void AktualizujWynik()
+    {
+        PlayerPrefs.SetInt("TBPunktyEnd",aktualnePunkty);
     }
 
     public void AktualizujPunkty()
@@ -80,21 +107,25 @@ public class Gra : MonoBehaviour
     public void WyczyszczonoJednaLinie()
     {
         aktualnePunkty += punktyZaJednaLinie;
+        liczbaWyczyszczonychwierszy += 1;
     }
 
     public void WyczyszczonoDwieLinie()
     {
         aktualnePunkty += punktyZaDwieLinie;
+        liczbaWyczyszczonychwierszy += 2;
     }
 
     public void WyczyszczonoTrzyLinie()
     {
         aktualnePunkty += punktyZaTrzyLinie;
+        liczbaWyczyszczonychwierszy += 3;
     }
 
     public void WyczyszczonoCzteryLinie()
     {
         aktualnePunkty += punktyZaCzteryLinie;
+        liczbaWyczyszczonychwierszy += 4;
     }
 
     public bool CzyWierszJestPelny(int y)
