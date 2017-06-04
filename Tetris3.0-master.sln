@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris3.0-master", "Tetris3.0-master.csproj", "{759EBAF7-F205-AD8F-D462-2F91A18CC929}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{759EBAF7-F205-AD8F-D462-2F91A18CC929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{759EBAF7-F205-AD8F-D462-2F91A18CC929}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{759EBAF7-F205-AD8F-D462-2F91A18CC929}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{759EBAF7-F205-AD8F-D462-2F91A18CC929}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
