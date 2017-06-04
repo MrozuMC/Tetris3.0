@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class Gra : MonoBehaviour
 {
-
-    public static int wysokośćPlanszy = 20;
-    public static int szerokośćPlanszy = 10;
+    public int x1 = 10;
+    public int x2 = 30;
+    public static int wysokośćPlanszy  = 20;
+    public static int szerokośćPlanszy = 30;
     public static Transform[,] siatka = new Transform[szerokośćPlanszy, wysokośćPlanszy];
 
     public int punktyZaJednaLinie = 40;
@@ -30,6 +32,7 @@ public class Gra : MonoBehaviour
     void Start()
     {
         SpawnNowegoKlocka();
+        SpawnNowegoKlocka2();
     }
 
     // Update is called once per frame
@@ -43,6 +46,21 @@ public class Gra : MonoBehaviour
     }
 
     public bool SprawdzCzyJestPowyzejSiatki(Klocek klocek)
+    {
+        for (int x = 0; x < szerokośćPlanszy; ++x)
+        {
+            foreach (Transform kloc in klocek.transform)
+            {
+                Vector2 pos = Round(kloc.position);
+                if (pos.y > wysokośćPlanszy - 1)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public bool SprawdzCzyJestPowyzejSiatki(Klocektwo klocek)
     {
         for (int x = 0; x < szerokośćPlanszy; ++x)
         {
@@ -130,7 +148,7 @@ public class Gra : MonoBehaviour
 
     public bool CzyWierszJestPelny(int y)
     {
-        for (int x = 0; x < szerokośćPlanszy; ++x)
+        for (int x = 0; x < x1; ++x)
         {
             if (siatka[x, y] == null)
             {
@@ -141,9 +159,30 @@ public class Gra : MonoBehaviour
         return true;
     }
 
+    public bool CzyWierszJestPelny2(int y)
+    {
+        for (int x = 20; x < x2; ++x)
+        {
+            if (siatka[x, y] == null)
+            {
+                return false;
+            }
+        }
+        liczbaPelnychWierszyTejTury++;
+        return true;
+    }
     public void UsunKlocki(int y)
     {
-        for (int x = 0; x < szerokośćPlanszy; ++x)
+        for (int x = 0; x < x1; ++x)
+        {
+            Destroy(siatka[x, y].gameObject);
+            siatka[x, y] = null;
+        }
+    }
+
+    public void UsunKlocki2(int y)
+    {
+        for (int x = 20; x < x2; ++x)
         {
             Destroy(siatka[x, y].gameObject);
             siatka[x, y] = null;
@@ -152,7 +191,20 @@ public class Gra : MonoBehaviour
 
     public void PrzesynWierszWdol(int y)
     {
-        for (int x = 0; x < szerokośćPlanszy; ++x)
+        for (int x = 0; x < x1; ++x)
+        {
+            if (siatka[x, y] != null)
+            {
+                siatka[x, y - 1] = siatka[x, y];
+                siatka[x, y] = null;
+                siatka[x, y - 1].position += new Vector3(0, -1, 0);
+            }
+        }
+    }
+
+    public void PrzesynWierszWdol2(int y)
+    {
+        for (int x = 20; x < x2; ++x)
         {
             if (siatka[x, y] != null)
             {
@@ -176,13 +228,30 @@ public class Gra : MonoBehaviour
         }
     }
 
+    public void UsunWiersz2()
+    {
+        for (int y = 0; y < wysokośćPlanszy; ++y)
+        {
+            if (CzyWierszJestPelny2(y))
+            {
+                UsunKlocki2(y);
+                PrzesynWierszeWdol2(y + 1);
+                --y;
+            }
+        }
+    }
+
     public void PrzesynWierszeWdol(int y)
     {
         for (int i = y; i < wysokośćPlanszy; ++i)
             PrzesynWierszWdol(i);
     }
-
-    public void AktualizowanieSiatki(Klocek klocek) { //chyba dobrze xd
+    public void PrzesynWierszeWdol2(int y)
+    {
+        for (int i = y; i < wysokośćPlanszy; ++i)
+            PrzesynWierszWdol2(i);
+    }
+    public void AktualizowanieSiatki(Klocek klocek) { 
       for (int y = 0; y < wysokośćPlanszy; ++y) {
         for (int x = 0; x < szerokośćPlanszy; ++x) {
             if(siatka[x,y] !=null) {
@@ -192,7 +261,7 @@ public class Gra : MonoBehaviour
           }
         }
       }
-    foreach (Transform kloc in klocek.transform){ //nie bic mnie za kloca;
+    foreach (Transform kloc in klocek.transform){ 
     Vector2 poz = Round (kloc.position);
         if (poz.y < wysokośćPlanszy) {
             siatka[(int)poz.x, (int)poz.y] = kloc;
@@ -200,8 +269,32 @@ public class Gra : MonoBehaviour
       }
     
     }
+    public void AktualizowanieSiatki(Klocektwo klocek)
+    {
+        for (int y = 0; y < wysokośćPlanszy; ++y)
+        {
+            for (int x = 0; x < szerokośćPlanszy; ++x)
+            {
+                if (siatka[x, y] != null)
+                {
+                    if (siatka[x, y].parent == klocek.transform)
+                    {
+                        siatka[x, y] = null;
+                    }
+                }
+            }
+        }
+        foreach (Transform kloc in klocek.transform)
+        {
+            Vector2 poz = Round(kloc.position);
+            if (poz.y < wysokośćPlanszy)
+            {
+                siatka[(int)poz.x, (int)poz.y] = kloc;
+            }
+        }
 
-    public Transform GetTransformAtGridPosition (Vector2 poz) { // zmienic nazwe xd
+    }
+    public Transform GetTransformAtGridPosition (Vector2 poz) { 
         if (poz.y > wysokośćPlanszy - 1)
         {
             return null;
@@ -214,11 +307,19 @@ public class Gra : MonoBehaviour
     public void SpawnNowegoKlocka()
     {
         GameObject nowyKlocek = (GameObject)Instantiate(Resources.Load(PobierzRandomowyKlocek(), typeof(GameObject)), new Vector2(5.0f, 20.0f), Quaternion.identity);
+       
+    }
+    public void SpawnNowegoKlocka2() {
+
+        GameObject nowyKlocek2 = (GameObject)Instantiate(Resources.Load(PobierzRandomowyKlocek2(), typeof(GameObject)), new Vector2(25.0f, 20.0f), Quaternion.identity);
     }
 
     public bool SprawdzCzyJestWPlanszy(Vector3 pozycja)
     {
-        return ((int)pozycja.x >= 0 && (int)pozycja.x < szerokośćPlanszy && (int)pozycja.y >= 0);
+        return ((int)pozycja.x >= 0 && (int)pozycja.x < x1 && (int)pozycja.y >= 0) || ((int)pozycja.x >= 20 && (int)pozycja.x < x2 && (int)pozycja.y >= 0);
+
+
+
     }
 
     public Vector2 Round(Vector2 pozycja)
@@ -228,39 +329,81 @@ public class Gra : MonoBehaviour
 
     string PobierzRandomowyKlocek()
     {
+        
+
+
+            int randomKlocek = Random.Range(1, 8);
+            string nazwaRandomowegoKlocka = "Prefabs/T";
+
+            switch (randomKlocek)
+            {
+                case 1:
+                    nazwaRandomowegoKlocka = "Prefabs/T";
+                    break;
+                case 2:
+                    nazwaRandomowegoKlocka = "Prefabs/I";
+                    break;
+                case 3:
+                    nazwaRandomowegoKlocka = "Prefabs/S";
+                    break;
+                case 4:
+                    nazwaRandomowegoKlocka = "Prefabs/Z";
+                    break;
+                case 5:
+                    nazwaRandomowegoKlocka = "Prefabs/J";
+                    break;
+                case 6:
+                    nazwaRandomowegoKlocka = "Prefabs/L";
+                    break;
+                case 7:
+                    nazwaRandomowegoKlocka = "Prefabs/O";
+                    break;
+                case 8:
+                    nazwaRandomowegoKlocka = "Prefabs/T";
+                    break;
+            }
+        
+        return nazwaRandomowegoKlocka;
+    }
+
+    string PobierzRandomowyKlocek2()
+    {
+
+
+
         int randomKlocek = Random.Range(1, 8);
-        string nazwaRandomowegoKlocka = "Prefabs/T";
+        string nazwaRandomowegoKlocka = "Prefabs/T2";
 
         switch (randomKlocek)
         {
             case 1:
-                nazwaRandomowegoKlocka = "Prefabs/T";
+                nazwaRandomowegoKlocka = "Prefabs/T2";
                 break;
             case 2:
-                nazwaRandomowegoKlocka = "Prefabs/I";
+                nazwaRandomowegoKlocka = "Prefabs/I2";
                 break;
             case 3:
-                nazwaRandomowegoKlocka = "Prefabs/S";
+                nazwaRandomowegoKlocka = "Prefabs/S2";
                 break;
             case 4:
-                nazwaRandomowegoKlocka = "Prefabs/Z";
+                nazwaRandomowegoKlocka = "Prefabs/Z2";
                 break;
             case 5:
-                nazwaRandomowegoKlocka = "Prefabs/J";
+                nazwaRandomowegoKlocka = "Prefabs/J2";
                 break;
             case 6:
-                nazwaRandomowegoKlocka = "Prefabs/L";
+                nazwaRandomowegoKlocka = "Prefabs/L2";
                 break;
             case 7:
-                nazwaRandomowegoKlocka = "Prefabs/O";
+                nazwaRandomowegoKlocka = "Prefabs/O2";
                 break;
             case 8:
-                nazwaRandomowegoKlocka = "Prefabs/T";
+                nazwaRandomowegoKlocka = "Prefabs/T2";
                 break;
         }
+
         return nazwaRandomowegoKlocka;
     }
-
     public void KoniecGry()
     {
         Application.LoadLevel("GameOver");

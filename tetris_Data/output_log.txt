@@ -2,22 +2,52 @@ Initialize engine version: 5.6.0f3 (497a0f351392)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: NVIDIA GeForce GTX 960 (ID=0x1401)
-    Vendor:   NVIDIA
-    VRAM:     3072 MB
-    Driver:   22.21.13.8205
+    Renderer: AMD Radeon R7 M265 Series (ID=0x6604)
+    Vendor:   ATI
+    VRAM:     2029 MB
+    Driver:   21.19.137.1
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Public\Documents\Unity Projects\Tetris3.0\tetris_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Public\Documents\Unity Projects\Tetris3.0\tetris_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Public\Documents\Unity Projects\Tetris3.0\tetris_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Public\Documents\Unity Projects\Tetris3.0\tetris_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Public\Documents\Unity Projects\Tetris3.0\tetris_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Public\Documents\Unity Projects\Tetris3.0\tetris_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\Public\Documents\Unity Projects\Tetris3.0\tetris_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\Public\Documents\Unity Projects\Tetris3.0\tetris_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-- Completed reload, in  0.018 seconds
-Platform assembly: C:\Users\Public\Documents\Unity Projects\Tetris3.0\tetris_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Public\Documents\Unity Projects\Tetris3.0\tetris_Data\Managed\System.dll (this message is harmless)
-desktop: 1600x900 59Hz; virtual: 3200x954 at -1600,0
+Platform assembly: C:\Users\Marcin\Desktop\Tetris3.0-master\tetris_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Marcin\Desktop\Tetris3.0-master\tetris_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Marcin\Desktop\Tetris3.0-master\tetris_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Marcin\Desktop\Tetris3.0-master\tetris_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Marcin\Desktop\Tetris3.0-master\tetris_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Marcin\Desktop\Tetris3.0-master\tetris_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Marcin\Desktop\Tetris3.0-master\tetris_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Marcin\Desktop\Tetris3.0-master\tetris_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+- Completed reload, in  0.068 seconds
+Platform assembly: C:\Users\Marcin\Desktop\Tetris3.0-master\tetris_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Marcin\Desktop\Tetris3.0-master\tetris_Data\Managed\System.dll (this message is harmless)
+desktop: 1366x768 60Hz; virtual: 2646x1024 at 0,-256
 <RI> Initializing input.
 <RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 4.081206 ms
+NullReferenceException: Object reference not set to an instance of an object
+  at Menu.Start () [0x00000] in <filename unknown>:0 
+ 
+(Filename:  Line: -1)
+
+Unloading 5 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 5.349701 ms
+
+Unloading 8 unused Assets to reduce memory usage. Loaded Objects now: 589.
+Total: 1.594133 ms (FindLiveObjects: 0.028924 ms CreateObjectMapping: 0.020060 ms MarkObjects: 0.196875 ms  DeleteObjects: 1.347805 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.820160 ms
+
+Unloading 106 unused Assets to reduce memory usage. Loaded Objects now: 272.
+Total: 4.032686 ms (FindLiveObjects: 0.078377 ms CreateObjectMapping: 0.076044 ms MarkObjects: 0.501519 ms  DeleteObjects: 3.374412 ms)
+
+Unloading 4 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.567767 ms
+
+Unloading 6 unused Assets to reduce memory usage. Loaded Objects now: 589.
+Total: 0.272453 ms (FindLiveObjects: 0.030790 ms CreateObjectMapping: 0.020060 ms MarkObjects: 0.190344 ms  DeleteObjects: 0.031257 ms)
+
+Setting up 4 worker threads for Enlighten.
+  Thread -> id: 1214 -> priority: 1 
+  Thread -> id: 1aa8 -> priority: 1 
+  Thread -> id: 1cbc -> priority: 1 
+  Thread -> id: 37c -> priority: 1 

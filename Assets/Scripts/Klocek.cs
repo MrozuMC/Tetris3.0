@@ -128,26 +128,26 @@ public class Klocek : MonoBehaviour
         fall = Time.time;
     }
 
+    
     public void Sterowanie()
     {
-		if (Input.GetKey("right"))
+        if (Input.GetKey(KeyCode.D))
         {
             Wprawo();
         }
-		if (Input.GetKey("left"))
+        if (Input.GetKey(KeyCode.A))
         {
             Wlewo();
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.W))
         {
             Obrot();
         }
-		if (Input.GetKey("down") || Time.time - fall >= fallSpeed)
+        if (Input.GetKey(KeyCode.S) || Time.time - fall >= fallSpeed)
         {
             Opadanie();
         }
     }
-
     bool SprawdzCzyJestWDobrejPozycji()
     {
         foreach (Transform klocek in transform)
