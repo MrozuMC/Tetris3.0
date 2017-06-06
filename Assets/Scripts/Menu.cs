@@ -24,4 +24,8 @@ public class Menu : MonoBehaviour {
     {
         Application.LoadLevel("Level");
     }
+    public void IdzDoMenu()
+    {
+        Application.LoadLevel("Menu");
+    }
 }
