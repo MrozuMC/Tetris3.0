@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class Gra : MonoBehaviour
 {
+	public bool enableSecondSpawn;
     public int x1 = 10;
     public int x2 = 30;
     public static int wysokośćPlanszy  = 20;
@@ -32,7 +33,11 @@ public class Gra : MonoBehaviour
     void Start()
     {
         SpawnNowegoKlocka();
+
+		if(enableSecondSpawn == true)
+		{
         SpawnNowegoKlocka2();
+		}
     }
 
     // Update is called once per frame

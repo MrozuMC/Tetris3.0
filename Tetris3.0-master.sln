@@ -1,7 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2017
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris3.0-master", "Tetris3.0-master.csproj", "{759EBAF7-F205-AD8F-D462-2F91A18CC929}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tetris3.0-master", "Assembly-CSharp.csproj", "{78868738-23A0-C103-6034-89A533F01306}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{759EBAF7-F205-AD8F-D462-2F91A18CC929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{759EBAF7-F205-AD8F-D462-2F91A18CC929}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{759EBAF7-F205-AD8F-D462-2F91A18CC929}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{759EBAF7-F205-AD8F-D462-2F91A18CC929}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78868738-23A0-C103-6034-89A533F01306}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78868738-23A0-C103-6034-89A533F01306}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78868738-23A0-C103-6034-89A533F01306}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78868738-23A0-C103-6034-89A533F01306}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal
